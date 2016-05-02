@@ -14,7 +14,7 @@
     <% @topics.each do |topic| %>
       <tr>
         <td><%= link_to topic.title, topic %></td>
-        <td><%= topic.votes.count %></td>
+        <td><%= topic.votes.size %></td>
         <td><%= button_to '投我投我', upvote_topic_path(topic), method: :post%></td>
         <td><%= button_to '不喜歡我', downvote_topic_path(topic), method: :post%></td>
         <td><%= link_to 'Delete', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>

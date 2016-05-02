@@ -16,7 +16,7 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    @topics = Topic.order("votes_count DESC")
   end
 
   # GET /topics/1
