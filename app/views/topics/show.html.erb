@@ -1,6 +1,8 @@
 <div class="col-md-12">
   <div class="group">
-    <%= link_to("Edit", edit_topic_path(@topic), class: "btn btn-primary pull-right")%>
+  	<% if @topic.editable_by?(current_user) %>
+        <%= link_to("Edit", edit_topic_path(@topic), class: "btn btn-primary pull-right")%>
+    <% end %>    
   </div>
   <h2><%= @topic.title %></h2>
   <p><%= @topic.description %></p>
