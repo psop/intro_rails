@@ -3,13 +3,13 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def upvote
-    @topic = Topic.find(params[:id])
+    @topic = current_user.topics.find(params[:id])
     @topic.votes.create
     redirect_to(topics_path)
   end
 
   def downvote
-    @topic = Topic.find(params[:id])
+    @topic = current_user.topics.find(params[:id])
     @topic.votes.last.destroy
     redirect_to(topics_path)
   end
@@ -32,12 +32,13 @@ class TopicsController < ApplicationController
 
   # GET /topics/1/edit
   def edit
+    @topic = current_user.topics.find(params[:id])
   end
 
   # POST /topics
   # POST /topics.json
   def create
-    @topic = Topic.new(topic_params)
+    @topic = current_user.topics.new(topic_params)
 
     respond_to do |format|
       if @topic.save
@@ -54,7 +55,7 @@ class TopicsController < ApplicationController
   # PATCH/PUT /topics/1.json
   def update
     respond_to do |format|
-      if @topic.update(topic_params)
+      if current_user.topics.find(params[:id])
         format.html { redirect_to topics_path, notice: 'Topic was successfully updated.' }
         format.json { render :show, status: :ok, location: @topic }
       else
@@ -67,6 +68,7 @@ class TopicsController < ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.json
   def destroy
+    @topic = current_user.topics.find(params[:id])
     @topic.destroy
     respond_to do |format|
       format.html { redirect_to topics_url, notice: 'Topic was successfully destroyed.' }
