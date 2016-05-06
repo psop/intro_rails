@@ -1,14 +1,9 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-12">
+  <div class="group">
+    <%= link_to("Edit", edit_topic_path(@topic), class: "btn btn-primary pull-right")%>
+  </div>
+  <h2><%= @topic.title %></h2>
+  <p><%= @topic.description %></p>
+  <%= link_to 'Back', topics_path %>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @topic.title %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @topic.description %>
-</p>
-
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
