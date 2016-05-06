@@ -1,5 +1,14 @@
-<h1>New Topic</h1>
+<div class="col-md-4 col-md-offset-4">
+  <h1>New Topic</h1>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', topics_path %>
+  <hr>
+  <%= simple_form_for @topic do |f| %>
+    <div class="form-group">
+      <%= f.input :title, input_html: { class: "form-control"} %>
+      <%= f.input :description, input_html: { class: "form-control"} %>
+    </div>
+    <%= f.submit "Submit", class: "btn btn-primary", data: { disable_with: "Submitting..." } %>
+  <% end %>
+  <%= link_to 'Back', topics_path %>
+</div>
+  
