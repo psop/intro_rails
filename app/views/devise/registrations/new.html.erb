@@ -9,6 +9,12 @@
   </div>
 
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.email_field :name %>
+  </div>
+
+
+  <div class="field">
     <%= f.label :password %>
     <% if @validatable %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
