@@ -3,15 +3,29 @@ class TopicsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def upvote
-    @topic = current_user.topics.find(params[:id])
-    @topic.votes.create
-    redirect_to(topics_path)
+    @topic = Topic.find(params[:id])
+    @topic.votes.create(user_id: current_user.id)
+
+    if @topic.save
+      flash[:notice] = "Thank you for upvoting!"
+      redirect_to(topics_path)
+    else
+      flash[:notice] =  "You have already upvoted this!"
+      redirect_to(topics_path)
+    end
   end
 
   def downvote
-    @topic = current_user.topics.find(params[:id])
-    @topic.votes.last.destroy
-    redirect_to(topics_path)
+    @topic = Topic.find(params[:id])
+    @topic.votes.last.destroy(user_id: current_user.id)
+
+    if @topic.save
+      flash[:notice] = "Thank you for downvoting!"
+      redirect_to(topics_path)
+    else
+      flash[:notice] =  "You have already downvoted this!"
+      redirect_to(topics_path)
+    end
   end
 
   # GET /topics
