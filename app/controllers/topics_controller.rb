@@ -17,15 +17,8 @@ class TopicsController < ApplicationController
 
   def downvote
     @topic = Topic.find(params[:id])
-    @topic.votes.last.destroy(user_id: current_user.id)
-
-    if @topic.save
-      flash[:notice] = "Thank you for downvoting!"
-      redirect_to(topics_path)
-    else
-      flash[:notice] =  "You have already downvoted this!"
-      redirect_to(topics_path)
-    end
+    @topic.votes.last.destroy
+    redirect_to(topics_path)
   end
 
   # GET /topics
